@@ -29,8 +29,6 @@
 
 之间的内容都删了）使用 `sudo apt-get update` 即可更新获取 阿里云软件源 提供的软件列表；
 
-
-
 ### 安装软件###
 
     sudo apt-get update
@@ -40,19 +38,13 @@
     sudo apt-get install redis-server
 
     apt-get install php7.0-curl php7.0-xml php7.0-mcrypt php7.0-json php7.0-gd php7.0-mbstring php7.0-mysql 
-​    
-
 ### 配置
 
 1.  配置 `PHP`
 
    输入 `/fix_pathinfo` 搜索，将 `cgi.fix_pathinfo=1` 改为 `cgi.fix_pathinfo=0 `
 
-   ​
-
        sudo vim /etc/php/7.1/fpm/php.ini
-
-   ​
 
 2. 配置 `FPM`
 
@@ -100,6 +92,7 @@
       ```
 
          解释：
+
          root: 是你的项目的`public`目录，也就是网站的入口
 
          index: 添加了，`index.php`，告诉Nginx先解析`index.php`文件
@@ -108,9 +101,8 @@
 
          location / try_files:  修改为了`try_files $uri $uri/ /index.php?$query_string;`
 
-         location ~ .php$:  部分告诉`Nginx`怎么解析`Php`，原封不动复制即可，但注意：
+         location ~ .php$:  部分告诉`Nginx`怎么解析`Php`，原封不动复制即可，但注意：`fastcgi_pass unix:/var/run/php/php7.1-fpm.sock;`的目录要和`fpm`的配置文件中的`listen`一致。
 
-      `fastcgi_pass unix:/var/run/php/php7.1-fpm.sock;`的目录要和`fpm`的配置文件中的`listen`一致。
 
 
 
