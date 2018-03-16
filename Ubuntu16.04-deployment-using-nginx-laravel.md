@@ -1,5 +1,3 @@
-
-
 ### Ubuntu16.04 换源
 
 `  cd /etc/apt`
@@ -91,18 +89,17 @@
       }
       ```
 
-         解释：
 
-         root: 是你的项目的`public`目录，也就是网站的入口
+解释:
 
-         index: 添加了，`index.php`，告诉Nginx先解析`index.php`文件
+   root: 是你的项目的`public`目录，也就是网站的入口
 
-         server_name: 你的域名，没有的话填写`localhost`
+   index: 添加了，`index.php`，告诉Nginx先解析`index.php`文件
 
-         location / try_files:  修改为了`try_files $uri $uri/ /index.php?$query_string;`
+   server_name: 你的域名，没有的话填写`localhost`
 
-         location ~ .php$:  部分告诉`Nginx`怎么解析`Php`，原封不动复制即可，但注意：`fastcgi_pass unix:/var/run/php/php7.1-fpm.sock;`的目录要和`fpm`的配置文件中的`listen`一致。
+   location / try_files:  修改为了`try_files $uri $uri/ /index.php?$query_string;`
 
-
+   location ~ .php$:  部分告诉`Nginx`怎么解析`Php`，原封不动复制即可，但注意：`fastcgi_pass unix:/var/run/php/php7.1-fpm.sock;`的目录要和`fpm`的配置文件中的`listen`一致。
 
 
