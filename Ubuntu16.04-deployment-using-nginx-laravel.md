@@ -42,14 +42,14 @@
 
    输入 `/fix_pathinfo` 搜索，将 `cgi.fix_pathinfo=1` 改为 `cgi.fix_pathinfo=0 `
 
-       sudo vim /etc/php/7.1/fpm/php.ini
+       sudo vim /etc/php/7.0/fpm/php.ini
 
 2. 配置 `FPM`
 
   ```
-   sudo vim /etc/php/7.1/fpm/pool.d/www.conf
+   sudo vim /etc/php/7.0/fpm/pool.d/www.conf
   ```
-   找到 `listen = /run/php/php7.1-fpm.sock` 修改为 `listen = /var/run/php/php7.1-fpm.sock` 。当然，你
+   找到 `listen = /run/php/php7.0-fpm.sock` 修改为 `listen = /var/run/php/php7.0-fpm.sock` 。当然，你
 
   也可以不修改，但必须前后一致，后面会用到这个配置。
 
@@ -61,14 +61,13 @@
 
       ```
       server {
-              listen 80 default_server;
-              listen [::]:80 default_server ipv6only=on;
-
+              listen 80;
+          
               root /var/www/your-project-name/public;
               index index.php index.html index.htm;
 
               # Make site accessible from http://localhost/
-              server_name www.xxx.com
+              server_name www.xxx.com;
 
               location / {
                       # First attempt to serve request as file, then
@@ -81,7 +80,7 @@
               location ~ \.php$ {
                       try_files $uri /index.php =404;
                       fastcgi_split_path_info ^(.+\.php)(/.+)$;
-                      fastcgi_pass unix:/run/php/php7.1-fpm.sock;
+                      fastcgi_pass unix:/run/php/php7.0-fpm.sock;
                       fastcgi_index index.php;
                       fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
                       include fastcgi_params;
